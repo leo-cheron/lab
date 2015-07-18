@@ -75,6 +75,6 @@ ParticlesController.prototype =
 
 	browseSources: function()
 	{
-		window.open("https://github.com/mrgnou", '_blank');
+		window.open("https://github.com/mrgnou/lab", '_blank');
 	}
 };

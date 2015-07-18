@@ -47,7 +47,7 @@ AModule.prototype =
 		if($.browser.webkit)
 		{
 			console.log("%cʕʘᴥʘʔ︎", "color: #A89E8F; font-size: 54px; font-family: courier new; line-height: 50px;");
-			console.log("%cWelcome developer friend.", "color: #A89E8F; font-size: 17px");
+			console.log("%cCheers!", "color: #A89E8F; font-size: 17px");
 			console.log("");
 		}
 	},
