@@ -1,0 +1,17 @@
+@import "../module";
+
+.source {
+	display: none;
+
+	&__video {
+		position: absolute;
+		top: 0;
+		opacity: 0.1;
+		// transform: scale(-1, 1); 
+	}
+}
+
+#canvas {
+	display: block;
+	width: 100%;
+}

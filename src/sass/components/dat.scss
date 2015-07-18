@@ -1,0 +1,108 @@
+/*
+* A custom white theme for dat.gui by @liabru
+* http://brm.io/
+* License: MIT
+*/
+
+body {
+	
+	.dg .c,
+	.dg .cr.function,
+	.dg .c select,
+	.dg .property-name,
+	.dg .title {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.dg.main.taller-than-window .close-button {
+		border-top: 1px solid #ddd;
+	}
+
+	.dg.main .close-button {
+		background-color: #fff;
+	}
+	 
+	.dg.main .close-button:hover {
+		background-color: #eee;
+	}
+
+	.dg {
+		color: #555;
+		text-shadow: none !important;
+	}
+
+	.dg.main::-webkit-scrollbar {
+		background: #fafafa;
+	}
+
+	.dg.main::-webkit-scrollbar-thumb {
+		background: #bbb;
+	}
+	 
+	.dg li:not(.folder) {
+		background: #fafafa;
+		border-bottom: 1px solid #ddd;
+	}
+	 
+	.dg li.save-row .button {
+		text-shadow: none !important;
+	}
+
+	.dg li.title {
+		background: #e8e8e8 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;
+	}
+
+	.dg li.folder {
+		border-left: 0;
+	}
+
+	.dg .cr.function:hover,
+	.dg .cr.boolean:hover {
+		background: #fff;
+	}
+	 
+	.dg .c input[type=text] {
+		background: #e9e9e9;
+	}
+	 
+	.dg .c input[type=text]:hover {
+		background: #eee;
+	}
+	 
+	.dg .c input[type=text]:focus {
+		background: #eee;
+		color: #555;
+	}
+	 
+	.dg .c .slider {
+		background: #e9e9e9;
+	}
+
+	.dg .c .slider:hover {
+		background: #eee;
+	}
+
+	.dg.a {
+		margin-right: 9px;
+		//margin-top: 9px;
+	}
+
+	.dg .cr.function {
+		background: #eee;
+	}
+
+	.dg .cr.function:hover {
+		background: #dadada;
+		border-bottom: 1px solid #2fa1d6;
+	}
+
+	.dg .cr.function:active {
+		background: #ddd;
+		border-bottom: 1px solid #2fa1d6;
+	}
+}

@@ -1,0 +1,37 @@
+#stats {
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 1 !important;
+	width: 85px !important;
+}
+
+#fps, #ms {
+	padding: 5px 5px 5px 5px !important;
+	opacity: 1 !important;
+	background: white !important;
+}
+
+#fpsText, #msText {
+	font: 9px 'Lucida Grande', sans-serif !important;
+}
+
+#fpsText {
+	color: #2fa1d6 !important;
+}
+
+#msText {
+	color: #6bd771 !important;
+}
+
+#msGraph {
+	background-color: #6bd771 !important;
+	margin-top: 4px;
+	span {
+		background-color: #ddd !important;
+	}
+}
+
+#fpsGraph {
+	display: none !important;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>{% block title %}Léo Chéron - Lab{% endblock %}</title>
+	<meta name="description" content="{% block description %}Léo Chéron, lab and experimentations{% endblock %}"/>
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Léo Chéron" />
+	<meta property="og:description" content="Front-end developer, Paris." />
+	<meta property="og:url" content="https://leo.cheron.works" />
+	<meta property="og:site_name" content="Léo Chéron" />
+	<meta property="og:image" content="http://leo.cheron.works/img/leo-cheron-fallback.jpg" />
+
+	<link rel="stylesheet" href="css/style.css?v={{ version }}" type="text/css" media="screen" />
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+	<section class="container">
+	{% block content %}{% endblock %}
+	</section>
+
+	<script src="js/scripts.js?v={{ version }}"></script>
+</body>
+</html>

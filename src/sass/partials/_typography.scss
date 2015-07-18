@@ -1,0 +1,46 @@
+/******************************************************************
+
+Stylesheet: Typography
+
+Need to import a font or set of icons for your site? Drop them in
+here or just use this to establish your typographical grid. Or not.
+
+Helpful Articles:
+http://trentwalton.com/2012/06/19/fluid-type/
+http://ia.net/blog/responsive-typography-the-basics/
+http://alistapart.com/column/responsive-typography-is-a-physical-discipline
+
+******************************************************************/
+
+
+/*********************
+FONT FACE
+*********************/
+
+
+@font-face {
+    font-family: 'gt_walsheimregular';
+    src: url('gt-walsheim-web-web.eot');
+    src: url('gt-walsheim-web-web.eot?#iefix') format('embedded-opentype'),
+         url('gt-walsheim-web-web.woff2') format('woff2'),
+         url('gt-walsheim-web-web.woff') format('woff'),
+         url('gt-walsheim-web-web.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'inconsolataregular';
+    src: url('inconsolata-regular-web.eot');
+    src: url('inconsolata-regular-web.eot?#iefix') format('embedded-opentype'),
+         url('inconsolata-regular-web.woff2') format('woff2'),
+         url('inconsolata-regular-web.woff') format('woff'),
+         url('inconsolata-regular-web.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// font stacks
+$sans-serif: "gt_walsheimregular", Helvetica, Arial, sans-serif;
+$serif: "inconsolataregular", Cambria, Times New Roman, Times, serif;
+

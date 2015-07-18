@@ -1,0 +1,68 @@
+.background {
+	background: url(../img/leo-cheron-ipad.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+@media only screen and (max-width: 768px) {
+	html {
+		font-size: 8px;
+	}
+	#content {
+		// border-width: 5px;
+		padding: 10px;
+
+		& .description {
+			margin-top: 30vh;
+		}
+
+		& .description, & .references {
+			// width: 100%;
+			margin-left: 10%;
+
+			// br {
+			// 	display: none;
+			// }
+		}
+
+		& section.references {
+			margin-bottom: 5rem;
+		}
+	}
+
+	h1 {
+		font-size: 6rem;
+		margin-left: 0;
+	}
+}
+
+@media only screen and (max-width: 481px) {
+	#content {
+
+		& .description {
+			margin-top: 30vh;
+		}
+
+		& .description, & .references {
+			text-align: center;
+			margin-left: 0;
+			width: 100%;
+
+			// br {
+			// 	display: none;
+			// }
+		}
+	}
+
+	h1 {
+		font-size: 5.5rem;
+		margin-left: 0;
+	}
+}
