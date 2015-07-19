@@ -10,14 +10,14 @@ var AModule = require("modules/AModule");
  * Main
  * @constructor
  */
-var MainParticles = function()
+var Main = function()
 {
 	AModule.apply(this);
 
 	this.init();
 };
 
-MainParticles.prototype = $.extend({}, AModule.prototype,
+Main.prototype = $.extend({}, AModule.prototype,
 {
 	init: function()
 	{
@@ -72,7 +72,7 @@ MainParticles.prototype = $.extend({}, AModule.prototype,
  */
 Stage.$document.ready(function()
 {
-	var main = new MainParticles();
+	var main = new Main();
 
 	(function tick()
 	{
