@@ -4,6 +4,7 @@ var $ = require("lib/zepto/zepto");
 var RequestAnimationFrame = require("lib/anonymous/utils/RequestAnimationFrame");
 var Stats = require("lib/stats/Stats");
 var Stage = require("lib/anonymous/core/Stage");
+var Easing = require("lib/zepto/Easing");
 
 
 /**
@@ -12,7 +13,6 @@ var Stage = require("lib/anonymous/core/Stage");
  */
 var AModule = module.exports = function()
 {
-	Stage.$window.on("resize", $.proxy(this._onResize, this));
 };
 
 AModule.prototype = 
@@ -21,9 +21,15 @@ AModule.prototype =
 	{
 		this._displayCredits();
 
+		$(".link--sources").animate({opacity: 1}, 500, Easing.outQuad, null, 500);
+
 		// stats
 		this._stats = new Stats();
 		document.body.appendChild(this._stats.domElement);
+
+		// resize
+		Stage.$window.on("resize", $.proxy(this._onResize, this));
+		Stage.resize();
 	},
 
 	/**
@@ -40,6 +46,7 @@ AModule.prototype =
 	_onResize: function()
 	{
 		Stage.resize();
+		console.log("AModule", Stage.width);
 	},
 
 	_displayCredits: function()

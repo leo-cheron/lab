@@ -1,0 +1,47 @@
+a, a:visited {
+	color: $gold-color;
+	text-decoration: none;
+	transition: color 500ms $easeOutQuad;
+
+	/* on hover */
+	&:hover {
+		transition: color 0;
+		color: $white-color;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	/* on click */
+	&:active {
+		color: $gold-color;
+	}
+}
+
+.link--sources, .preloader {
+	position: fixed;
+	z-index: 999;
+	font-family: $serif;
+	color: $gold-color;
+	@include font-smoothing(on);
+}
+
+.link--sources {
+	bottom: 3rem;
+	margin-top: -1.1rem;
+	font-size: 1rem;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+}
+
+.preloader {
+	width: 100%;
+	text-align: center;
+	top: 50%;
+	margin-top: -1.1rem;
+	opacity: 0;
+	pointer-events: none;
+	font-size: 1.4rem;
+}

@@ -64,17 +64,10 @@ ParticlesController.prototype =
 		// this._gui.add(this.data, 'repulsionStrength', 0, 0.01).step(0.00001).onChange(callback);
 		// this._gui.add(this.data, 'repulsionSensibility', 0, 3).step(0.00001).onChange(callback);
 		// repulsion.add(this.data, 'repulsionRadius', 1.0, 3).step(1).onChange(callback);
-
-		this._gui.add(this, 'browseSources');
 	},
 
 	_onChange: function()
 	{
 		$(this).trigger("change");
 	},
-
-	browseSources: function()
-	{
-		window.open("https://github.com/mrgnou/lab", '_blank');
-	}
 };
