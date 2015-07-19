@@ -23,7 +23,7 @@ gulp.task('browserify', ['setModuleSrc'], function()
 		packageCache: {}, 
 		extensions: [".js", ".es6"],
 		paths: [config.src + "_shared/js/", config.moduleSrc + "js/"],
-		debug: argv.env != "prod",
+		debug: config.env != "prod",
 		fullPaths: false
 	});
 

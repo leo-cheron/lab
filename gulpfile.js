@@ -26,13 +26,12 @@ gulp.task('setModuleSrc', function()
 
 gulp.task('setProd', function()
 {
-	argv.env = "prod";
+	config.env = "prod";
 });
 
 gulp.task('dist', function()
 {
-	runSequence('setModuleSrc', 'setProd', 'sprite', 'sass', 'uglify',
-				'setMobile', 'sprite', 'sass', 'uglify');
+	runSequence('setModuleSrc', 'setProd', 'sass', 'uglify');
 });
 
 gulp.task('default', ['sass', 'twig', 'watch']);

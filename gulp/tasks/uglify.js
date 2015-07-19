@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	argv = require('yargs').argv,
-	config = require('../config');
+	config = require('../config'),
+
+	uglify = require('gulp-uglify');
 
 //-----------------------------------------------------o 
 // uglify

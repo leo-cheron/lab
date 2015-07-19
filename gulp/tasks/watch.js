@@ -8,14 +8,16 @@ var gulp = require('gulp'),
 
 gulp.task('setWatch', ['setModuleSrc'], function() 
 {
-	global.isWatching = argv.env != "prod";
+	global.isWatching = config.env != "prod";
 });
 
 gulp.task('watch', ['setWatch', 'browserify', 'browser-sync'], function() 
 {
-	if(argv.env != "prod")
+	if(config.env != "prod")
 	{
-		gulp.watch(config.src + 'sass/**/*.scss', ['sass']);
-		gulp.watch(config.src + 'twig/**/*.twig', ['twig']);
+		gulp.watch(config.src + '**/*.scss', ['sass']);
+		gulp.watch(config.moduleSrc + 'sass/**/*.scss', ['sass']);
+		gulp.watch(config.src + '**/*.twig', ['twig']);
+		gulp.watch(config.moduleSrc + 'twig/**/*.twig', ['twig']);
 	}
 });

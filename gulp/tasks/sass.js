@@ -17,8 +17,8 @@ gulp.task('sass', ['setModuleSrc'], function()
 {
 	return sass(config.moduleSrc + 'sass/style.scss',
 		{ 
-			style: argv.env != "prod" ? "nested" : "compressed",
-			sourcemap: argv.env != "prod",
+			style: config.env != "prod" ? "nested" : "compressed",
+			sourcemap: config.env != "prod",
 			quiet: true,
 		})
 		.pipe(autoprefixer({
