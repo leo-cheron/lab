@@ -1,4 +1,4 @@
-# Code experimentation, R & D stuff
+# Code experimentation, R & D and stuff
 
 This repository is a pool of visual experimentations or modules coded for web. They may rely on frameworks such as [ThreeJS](https://github.com/mrdoob/three.js/) or [PixiJS](https://github.com/GoodBoyDigital/pixi.js/).
 
