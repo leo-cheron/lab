@@ -14,8 +14,6 @@ var MainParticles = function()
 {
 	AModule.apply(this);
 
-	$(window).on("resize", $.proxy(this._onResize, this));
-
 	this.init();
 };
 
