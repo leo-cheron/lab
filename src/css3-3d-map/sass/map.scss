@@ -1,0 +1,105 @@
+#map {
+	$w: 1280px; 
+	$h: 1280px;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+	overflow: hidden;
+	perspective: 1600px;
+
+	.scene-wrapper {
+		position: absolute;
+		z-index: 2;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		transform: translate3d(0, 300px, 0);
+		transform-style: preserve-3d;
+
+		&.shown {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+		}
+	}
+
+	.scene {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		transform-style: preserve-3d;
+
+		.wrapper {
+			width: $w;
+			height: $h;
+			position: absolute;
+			z-index: 1;
+			transform-style: preserve-3d;
+		}
+
+		ul {
+			width: $w;
+			height: $h;
+			position: absolute;
+			z-index: -1;
+			transform-style: preserve-3d;
+			pointer-events: none;
+
+			li {
+				display: block;
+				position: absolute;
+				// transition-property: all;
+
+				img {
+					display: block;
+				}
+			}
+		}
+	}
+
+	.buttons {
+		position: absolute;
+		z-index: 2;
+		display: none;
+		transform-style: preserve-3d;
+		opacity: 0;
+
+		.btn-wrapper {
+			transform-style: preserve-3d;
+			position: absolute;
+			z-index:9;
+
+			.rotate {
+				transform-style: preserve-3d;
+			}
+			
+			.btn {
+				position: absolute;
+				height: 26px;
+				width: 26px;
+				margin-top: -13px;
+				margin-left: -13px;			
+
+				i {
+					transform: scale(0.6);
+				}
+			}
+
+			.tooltip {
+				position: absolute;
+				top: -30px;
+				z-index: 10;
+				cursor:pointer;
+				transform: translate3d(-50%, -100%, 30px);
+			}
+		}
+
+	}
+}
+
+@import "map-layers";
