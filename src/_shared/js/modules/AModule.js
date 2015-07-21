@@ -46,7 +46,6 @@ AModule.prototype =
 	_onResize: function()
 	{
 		Stage.resize();
-		console.log("AModule", Stage.width);
 	},
 
 	_displayCredits: function()
