@@ -2,7 +2,7 @@
 
 var THREE = require("lib/three/Three");
 var DoubleFBO = require("./DoubleFBO");
-var ParticlesController = require("./ParticlesController");
+var ParticlesModel = require("./ParticlesModel");
 var ParticlesGeometry = require("./ParticlesGeometry");
 
 var particlesVs = require("./shaders/particlesVs.glsl");
@@ -90,8 +90,8 @@ Particles.prototype =
 		this._doubleFBO = new DoubleFBO(Config.TEXTURE_WIDTH, this._renderer, this._textureInput);
 
 		// Controller
-		this._particlesController = new ParticlesController();
-		$(this._particlesController).on("change", $.proxy(this._onControllerChange, this));
+		this._particlesModel = new ParticlesModel();
+		$(this._particlesModel).on("change", $.proxy(this._onControllerChange, this));
 		this._onControllerChange();
 
 		this.resize();
@@ -221,7 +221,7 @@ Particles.prototype =
 
 	_onControllerChange: function()
 	{
-		var data = this._particlesController.data;
+		var data = this._particlesModel.data;
 
 		document.getElementById("canvas").style.backgroundColor = data.bgColor;
 		
