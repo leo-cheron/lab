@@ -1,0 +1,28 @@
+@import "../../_shared/sass/style";
+@import "./variables";
+
+html, body {
+	font-family: Helvetica, Helvetica Neue, Arial, sans-serif;
+	background-color: #FFFFFF;
+	color: #333;
+	text-align: center;
+	overflow: hidden;
+	height: 100%;
+}
+
+#title {
+	position: absolute;
+	bottom: 50%;
+	width: 100%;
+	z-index: 2;	
+	height: 167px;
+	opacity: 0;	
+}
+
+#delaunay {
+	position: relative;
+	z-index: 1;
+	max-width: $outputWidth;
+	max-height: $outputHeight;
+	margin: 0 auto;
+}
