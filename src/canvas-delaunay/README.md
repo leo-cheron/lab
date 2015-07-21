@@ -1,6 +1,6 @@
 # Delaunay animated shape
 
-Simple animated Delaunay shape, done for brand identity [Les Napoélons](http://lesnapoleons.com/).
+Simple animated Delaunay shape, designed for brand identity [Les Napoléons](http://lesnapoleons.com/).
 
 ## Preview
 
