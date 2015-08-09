@@ -20,12 +20,19 @@ gulp.task('browserify', ['setModuleSrc'], function()
 	var b = browserify(config.moduleSrc + "js/Main.js",
 	{
 		cache: {},
+		noParse: ["lib/three/Three", "lib/zepto/zepto"],
 		packageCache: {}, 
 		extensions: [".js", ".es6"],
 		paths: [config.src + "_shared/js/", config.moduleSrc + "js/"],
 		debug: config.env != "prod",
-		fullPaths: false
+		fullPaths: false,
 	});
+
+	// b
+	// 	.ignore("lib/three/Three")
+	// 	.ignore("lib/zepto/zepto")
+	// 	.ignore("lib/dat/dat.gui")
+	// 	.ignore("lib/stats/Stats");
 
 	var bundler = global.isWatching ? watchify(b) : b;
 	bundler.transform(babelify.configure(

@@ -202,8 +202,8 @@ Particles.prototype =
 			this._rtOutput.dispose();
 		this._rtOutput = new THREE.WebGLRenderTarget(this._width, this._height, 
 		{ 
-			wrapS: THREE.RepeatWrapping,
-			wrapT: THREE.RepeatWrapping, 
+			wrapS: THREE.ClampToEdgeWrapping,
+			wrapT: THREE.ClampToEdgeWrapping, 
 			minFilter: THREE.NearestFilter, 
 			magFilter: THREE.NearestFilter, 
 			format: THREE.RGBAFormat, 

@@ -88,8 +88,6 @@ DoubleFBO.prototype =
 				// uRepulsionRadius: { type: "f", value: null },
 				uInvert: { type: "i", value: null },
 
-				uThreshold: { type: "f", value: 0.25 },
-		 		uSmoothness: { type: "f", value: 0.3 },
 		 		uMapStrength: { type: "f", value: 0.1 }
 			},
 			vertexShader: copyVs(),
@@ -107,9 +105,7 @@ DoubleFBO.prototype =
 	},
 
 	render: function()
-	{
-		this._renderShader(this._rtPosition1, this._rtPosition2);
-		
+	{	
 		if (this._pingPong)
 			this._renderShader(this._rtPosition1, this._rtPosition2);
 		else 
