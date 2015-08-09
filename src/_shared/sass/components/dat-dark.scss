@@ -1,0 +1,33 @@
+/*
+* A custom white theme for dat.gui by @liabru
+* http://brm.io/
+* License: MIT
+*/
+
+body {
+
+	.dg .cr.number {
+		border-left: 3px solid $gold-color;
+	}
+	.dg .cr.number input[type=text] {
+		color: $gold-color;
+	}
+
+	.dg .cr.boolean {
+		border-left: 3px solid #FF6161;
+	}
+
+	.dg .c .slider-fg,
+	.dg .c .slider:hover .slider-fg {
+		background: $gold-color;
+	}
+
+	.dg .cr.function:hover {
+		border-bottom: 1px solid $gold-color;
+	}
+
+	.dg .cr.function:active {
+		border-bottom: 1px solid $gold-color;
+	}
+
+}

@@ -6,12 +6,12 @@ var GUI = require("lib/dat/dat.gui");
  * Controller
  * @constructor
  */
-var ParticlesController = module.exports = function()
+var ParticlesModel = module.exports = function()
 {
 	this.init();
 };
 
-ParticlesController.prototype = 
+ParticlesModel.prototype = 
 {
 	init: function() 
 	{

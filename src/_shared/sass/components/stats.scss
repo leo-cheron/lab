@@ -10,7 +10,7 @@
 #fps, #ms {
 	padding: 5px 5px 5px 5px !important;
 	opacity: 1 !important;
-	background: white !important;
+	background: transparent !important;
 }
 
 #fpsText, #msText {
@@ -18,7 +18,7 @@
 }
 
 #fpsText {
-	color: #2fa1d6 !important;
+	color: $gold-color !important;
 }
 
 #msText {
@@ -29,7 +29,7 @@
 	background-color: #6bd771 !important;
 	margin-top: 4px;
 	span {
-		background-color: #ddd !important;
+		background-color: #111 !important;
 	}
 }
 
