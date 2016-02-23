@@ -106,8 +106,8 @@ export default class Flames
 		this.cameraControls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
 		this.cameraControls.target.set(0, 0, 0);
 
-		var axisHelper = new THREE.AxisHelper(1000);
-		this.scene.add(axisHelper);
+		// var axisHelper = new THREE.AxisHelper(1000);
+		// this.scene.add(axisHelper);
 	}
 
 	resize()
