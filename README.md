@@ -21,6 +21,7 @@ Sass is also required.
 Run `gulp --name module_name` to compile, watch and preview module.
 
 ### Modules list
+- [webgl-flames](https://github.com/mrgnou/lab/tree/master/src/webgl-flames)
 - [webgl-gpgpu-particles](https://github.com/mrgnou/lab/tree/master/src/webgl-gpgpu-particles)
 - [css3-3d-map](https://github.com/mrgnou/lab/tree/master/src/css3-3d-map)
 - [canvas-delaunay](https://github.com/mrgnou/lab/tree/master/src/canvas-delaunay)
