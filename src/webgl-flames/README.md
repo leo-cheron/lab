@@ -1,6 +1,6 @@
 # InstancedBufferGeometry Flames
 
-Candle flame shader displayed as instances buffer geometry.
+Candle flame shader displayed as instanced buffer geometry.
 
 ## [Preview](http://lab.cheron.works/webgl-flames/)
 
