@@ -31,7 +31,7 @@ gulp.task('setProd', function()
 
 gulp.task('dist', function()
 {
-	runSequence('setModuleSrc', 'setProd', 'twig', 'sass', 'uglify');
+	runSequence('setModuleSrc', 'setProd', 'twig', 'sass', 'webpack');
 });
 
 gulp.task('default', ['sass', 'twig', 'watch']);
