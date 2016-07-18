@@ -1,6 +1,6 @@
 "use strict";
 
-var THREE = require("lib/three/Three");
+var THREE = require("lib/three/three");
 
 var copyVs = require("./shaders/copyVs.glsl");
 var copyFs = require("./shaders/copyFs.glsl");
