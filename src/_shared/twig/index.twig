@@ -22,11 +22,14 @@
 </head>
 
 <body>
-	<section class="container">
+	<section id="container" class="container">
 	{% block content %}{% endblock %}
 	</section>
-
+	
+	{% set _source = block('sources') %}
+	{% if _source %}
 	<a href="{% block sources %}https://github.com/mrgnou/lab{% endblock %}" target="_blank" class="link--sources">Browse sources</span>
+	{% endif %}
 
 	<script src="js/scripts.js?v={{ version }}"></script>
 

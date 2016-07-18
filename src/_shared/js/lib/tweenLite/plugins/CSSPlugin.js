@@ -2431,7 +2431,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 }); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
 
 //export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
+/*(function(name) {
 	"use strict";
 	var getGlobal = function() {
 		return (_gsScope.GreenSockGlobals || _gsScope)[name];
@@ -2443,3 +2443,4 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 		module.exports = getGlobal();
 	}
 }("CSSPlugin"));
+*/

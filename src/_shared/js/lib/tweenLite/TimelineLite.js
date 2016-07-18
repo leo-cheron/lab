@@ -698,10 +698,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 	var getGlobal = function() {
 		return (_gsScope.GreenSockGlobals || _gsScope)[name];
 	};
-	if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	} else if (typeof(module) !== "undefined" && module.exports) { //node
-		require("./TweenLite.js"); //dependency
-		module.exports = getGlobal();
-	}
+	
+	require("./TweenLite.js"); //dependency
+	module.exports = getGlobal();
 }("TimelineLite"));

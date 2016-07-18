@@ -103,9 +103,7 @@
 						//exports to multiple environments
 						if (global) {
 							_globals[n] = cl; //provides a way to avoid global namespace pollution. By default, the main classes like TweenLite, Power1, Strong, etc. are added to window unless a GreenSockGlobals is defined. So if you want to have things added to a custom object instead, just do something like window.GreenSockGlobals = {} before loading any GreenSock files. You can even set up an alias like window.GreenSockGlobals = windows.gs = {} so that you can access everything like gs.TweenLite. Also remember that ALL classes are added to the window.com.greensock object (in their respective packages, like com.greensock.easing.Power1, com.greensock.TweenLite, etc.)
-							if (typeof(define) === "function" && define.amd){ //AMD
-								define((window.GreenSockAMDPath ? window.GreenSockAMDPath + "/" : "") + ns.split(".").pop(), [], function() { return cl; });
-							} else if (ns === moduleName && typeof(module) !== "undefined" && module.exports){ //node
+							if (ns === moduleName && typeof(module) !== "undefined" && module.exports){ //node
 								module.exports = cl;
 							}
 						}
@@ -1554,6 +1552,47 @@
 			toVars.startAt = fromVars;
 			toVars.immediateRender = (toVars.immediateRender != false && fromVars.immediateRender != false);
 			return new TweenLite(target, duration, toVars);
+		};
+
+		TweenLite.staggerTo = function(targets, duration, vars, stagger, onCompleteAll, onCompleteAllParams, onCompleteAllScope) {
+			stagger = stagger || 0;
+			var delay = vars.delay || 0,
+				a = [],
+				finalComplete = function() {
+					if (vars.onComplete) {
+						vars.onComplete.apply(vars.onCompleteScope || this, arguments);
+					}
+					onCompleteAll.apply(onCompleteAllScope || this, onCompleteAllParams || _blankArray);
+				},
+				l, copy, i, p;
+			if (!_isArray(targets)) {
+				if (typeof(targets) === "string") {
+					targets = TweenLite.selector(targets) || targets;
+				}
+				if (_isSelector(targets)) {
+					targets = _slice(targets);
+				}
+			}
+			targets = targets || [];
+			if (stagger < 0) {
+				targets = _slice(targets);
+				targets.reverse();
+				stagger *= -1;
+			}
+			l = targets.length - 1;
+			for (i = 0; i <= l; i++) {
+				copy = {};
+				for (p in vars) {
+					copy[p] = vars[p];
+				}
+				copy.delay = delay;
+				if (i === l && onCompleteAll) {
+					copy.onComplete = finalComplete;
+				}
+				a[i] = new TweenLite(targets[i], duration, copy);
+				delay += stagger;
+			}
+			return a;
 		};
 
 		TweenLite.delayedCall = function(delay, callback, params, scope, useFrames) {
