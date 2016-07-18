@@ -8,10 +8,10 @@ var gulp = require('gulp'),
 
 gulp.task('setWatch', ['setModuleSrc'], function() 
 {
-	global.isWatching = config.env != "prod";
+	config.isWatching = config.env != "prod";
 });
 
-gulp.task('watch', ['setWatch', 'browserify', 'browser-sync'], function() 
+gulp.task('watch', ['setWatch', 'webpack', 'browser-sync'], function() 
 {
 	if(config.env != "prod")
 	{

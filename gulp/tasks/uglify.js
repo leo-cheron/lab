@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 //-----------------------------------------------------o 
 // uglify
 
-gulp.task('uglify', ['browserify'], function() 
+gulp.task('uglify', ['webpack'], function() 
 {
 	// main app js file
 	gulp.src(config.bin + argv.name + '/js/*.js')
