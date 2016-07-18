@@ -1,0 +1,13 @@
+@import "../../_shared/sass/style";
+
+body {
+	background: #111;
+}
+
+#canvas {
+	display: block;
+	position: absolute;
+	z-index: 0;
+	left: 0;
+	top: 0;
+}
