@@ -50,7 +50,8 @@ var FresnelShader = module.exports = function(params)
 		"shadowMatrix" : { type: "m4v", value: [] }
 	};
 
-	for (param in params)
+	console.log('FresnelShader.js', params);
+	for (let param in params)
 	{
 		if(this.uniforms[param] !== undefined)
 		{

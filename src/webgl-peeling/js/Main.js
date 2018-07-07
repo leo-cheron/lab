@@ -2,8 +2,6 @@ import AModule from "modules/AModule";
 import TweenLite from "lib/tweenLite/TweenLite";
 import EasePack from "lib/tweenLite/easing/EasePack";
 
-import Config from "./Config";
-
 import SceneModel from "./scene/SceneModel";
 import SceneController from "./scene/SceneController";
 import Scene from "./scene/Scene";
@@ -59,15 +57,16 @@ export default class Main extends AModule
 /**
  * Let's roll
  */
-Stage.$document.ready(function()
+const onDomContentLoaded = function() 
 {
-	var main = new Main();
+	document.removeEventListener("DOMContentLoaded", onDomContentLoaded);
+
+	const main = new Main();
 
 	(function tick()
 	{
 		main.update();
-
-		if(!Config.RENDER_ONCE)
-			window.requestAnimationFrame(tick);
+		window.requestAnimationFrame(tick);
 	})();
-});
+};
+document.addEventListener("DOMContentLoaded", onDomContentLoaded);

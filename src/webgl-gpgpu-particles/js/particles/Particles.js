@@ -29,9 +29,6 @@ export default class Particles
 
 	_initScene()
 	{
-		this._canvas = document.createElement("canvas");
-		this._context = this._canvas.getContext("2d");
-
 		this._sceneRender = new THREE.Scene();
 		this._scene = new THREE.Scene();
 
@@ -50,12 +47,15 @@ export default class Particles
 			return;
 		}
 
-		this.$dom.appendChild(this._renderer.domElement);
+		// input texture
+		this._canvas = document.createElement("canvas");
+		this._context = this._canvas.getContext("2d");
 
-		// image texture
-		// this._textureInput = new THREE.TextureLoader().load( "img/hello.jpg", this._initMesh.bind(this));
-		
-		// video texture
+		// document.body.appendChild(this._canvas);
+		// this._canvas.style.position = "absolute";
+		// this._canvas.style.top = 0;
+		// this._canvas.style.zIndex = 1000;
+
 		this._textureInput = new THREE.Texture(this._canvas);
 		this._textureInput.generateMipmaps = false;
 		this._textureInput.anisotropy = 0;
@@ -63,7 +63,9 @@ export default class Particles
 		this._textureInput.minFilter = THREE.NearestFilter;
 		this._textureInput.wrapS = THREE.ClampToEdgeWrapping;
 		this._textureInput.wrapT = THREE.ClampToEdgeWrapping;
-
+		
+		this.$dom.appendChild(this._renderer.domElement);
+		
 		this._initMesh();
 	}
 
@@ -119,18 +121,18 @@ export default class Particles
 			{
 				this.needsUpdate = false;
 
-				let ww = window.innerWidth,
-					wh = window.innerHeight,
+				let ww = this._width,
+					wh = this._height,
 					x, y, w, h;
 
-				const r = this._texture.width / this._texture.height;
+				const r = this._texture.clientWidth / this._texture.clientHeight;
 				const wr = ww / wh;
 				if(wr < r)
 				{
 					h = wh;
 					w = h * r;
 					
-					x = (ww - w) * 0.5;
+					x = -(ww - w) * 0.5;
 					y = 0;
 				}
 				else
@@ -142,6 +144,8 @@ export default class Particles
 					y = (wh - h) * 0.5;
 				}
 
+				// console.log('Particles.js', x, y, -w, h);
+				// this._context.drawImage(this._texture, 0, 0);
 				this._context.drawImage(this._texture, x, y, -w, h);
 				this._textureInput.needsUpdate = true;
 			}
@@ -162,8 +166,8 @@ export default class Particles
 			this._width = window.innerWidth;
 			this._height = window.innerHeight;
 
-			// this._canvas.width = this._width;
-			// this._canvas.height = this._height;
+			this._canvas.width = this._width;
+			this._canvas.height = this._height;
 
 			this._context.scale(-1, 1);
 			

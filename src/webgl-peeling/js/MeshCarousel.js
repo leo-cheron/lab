@@ -2,6 +2,7 @@ import THREE from "lib/three/three";
 import MeshFactory from "scene/mesh/MeshFactory";
 import AnimatedMesh from "scene/mesh/AnimatedMesh";
 import TweenLite from "lib/tweenLite/TweenLite";
+import Stage from "lib/anonymous/core/Stage";
 
 // import OrbitControls from "lib/three/extras/controls/OrbitControls";
 

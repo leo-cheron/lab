@@ -1,4 +1,5 @@
 import THREE from "lib/three/three";
+import Stage from "lib/anonymous/core/Stage";
 // import EffectComposer from "lib/three/postprocessing/EffectComposer";
 // import FilmPass from "lib/three/postprocessing/FilmPass";
 // import CopyShader from "lib/three/shaders/CopyShader";
