@@ -25,9 +25,9 @@ varying float vPower;
 void main()
 {
 	// fog
-	float depth = gl_FragCoord.z / gl_FragCoord.w;
-	float fogFactor = smoothstep(fogNear, fogFar, depth);
-	if(fogFactor == 1.0) discard;
+	// float depth = gl_FragCoord.z / gl_FragCoord.w;
+	// float fogFactor = smoothstep(fogNear, fogFar, depth);
+	// if(fogFactor == 1.0) discard;
 	
 	float t = time + vTimeInit;
 	vec2 pos = -1.0 + 2.0 * vUv;
@@ -107,5 +107,6 @@ void main()
 	// color = vec3(vPower);
 	// end debug
 
-	gl_FragColor = vec4(color, 1.0 - fogFactor);
+	gl_FragColor = vec4(color, 1.0);
+	// gl_FragColor = vec4(color, 1.0 - fogFactor);
 }

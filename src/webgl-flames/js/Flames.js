@@ -13,7 +13,7 @@ export default class Flames
 		this.model = model;
 		this.container = $("#container");
 
-		this.camera = new THREE.PerspectiveCamera(40, Stage.width / Stage.height, 5, 5000);
+		this.camera = new THREE.PerspectiveCamera(40, Stage.width / Stage.height, 5, 10000);
 		this.camera.position.y = 600;
 		this.camera.position.z = 2800;
 
@@ -22,7 +22,7 @@ export default class Flames
 
 		//
 
-		var count = 4000;
+		var count = 3000;
 
 		var geometry = new THREE.InstancedBufferGeometry();
 		geometry.copy(new THREE.PlaneBufferGeometry(100, 100));
@@ -85,8 +85,8 @@ export default class Flames
 			depthTest: false,
 			depthWrite: false,
 			transparent: true,
-			// blending: THREE.CustomBlending,
-			blending: THREE.AdditiveBlending,
+			blending: THREE.CustomBlending,
+			// blending: THREE.AdditiveBlending,
         });
 
 		material.blendSrc = THREE.SrcAlphaFactor;
