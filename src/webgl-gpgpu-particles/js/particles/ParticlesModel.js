@@ -55,7 +55,7 @@ export default class ParticlesModel
 		this._gui.add(this.data, 'mapStrength', 0, 0.2).step(0.0001).onChange(callback);
 		
 		this._gui.add(this.data, 'resetStacked').onChange(callback);
-		this._gui.add(this.data, 'stackSensibility', 0, 3).step(0.00001).onChange(callback);
+		this._gui.add(this.data, 'stackSensibility', 0, 1).step(0.00001).onChange(callback);
 
 		this._gui.add(this.data, 'inverted').onChange(callback);
 		this._gui.addColor(this.data, 'particlesColor').onChange(callback);
