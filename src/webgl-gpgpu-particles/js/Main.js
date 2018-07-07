@@ -60,6 +60,7 @@ export default class Main extends AModule
 
 	_onWebcamSuccess()
 	{
+		// set input texture, could be video / image (will be drawn in a canvas)
 		this._particles.setTexture(this._webcam.dom, true);
 	}
 }

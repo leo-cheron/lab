@@ -9,6 +9,8 @@ export default class Webcam
 		this.$ = $(this);
 		this.params = params;
 
+		this.dom = params.dom;
+
 		this.init();
 	}
 
@@ -37,7 +39,8 @@ export default class Webcam
 
 	_success(stream)
 	{
-		this.dom.src = window.URL.createObjectURL(stream);
+		// this.dom.src = window.URL.createObjectURL(stream);
+		this.dom.srcObject = stream;
 		$(this.dom).on("loadedmetadata", $.proxy(this._onLoadedmetadata, this))
 	}
 
