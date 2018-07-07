@@ -2,7 +2,6 @@ var path = require('path'),
 	fs = require('fs');
 
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
 	runSequence = require('run-sequence').use(gulp),
 	argv = require('yargs').argv,
 	config = require('./gulp/config');
@@ -24,14 +23,9 @@ gulp.task('setModuleSrc', function()
 		config.moduleSrc = config.src + argv.name + "/";
 });
 
-gulp.task('setProd', function()
+gulp.task('build', function()
 {
-	config.env = "prod";
-});
-
-gulp.task('dist', function()
-{
-	runSequence('setModuleSrc', 'setProd', 'twig', 'sass', 'webpack');
+	runSequence('setModuleSrc', 'twig', 'sass', 'webpack');
 });
 
 gulp.task('default', ['sass', 'twig', 'watch']);

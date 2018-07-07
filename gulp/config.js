@@ -9,6 +9,8 @@ module.exports = {
 	src: src,
 	bin: bin,
 
+	env: argv.production ? 'prod' : 'dev',
+
 	browsersSupport: ['last 2 versions', '> 5%'],
 
 	webpack: {

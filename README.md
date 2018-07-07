@@ -13,7 +13,8 @@ This project relies on [gulp](http://gulpjs.com/) and several of its plugins.
 Run `npm install` to install node dependencies modules.
 
 ## Getting started
-Run `gulp --name module_name` to compile, watch and preview module.
+Run `gulp --name module_name` to compile, watch and preview module.  
+Run `gulp build --name module_name --production` to compile for production.  
 
 ### Modules list
 - [webgl-flames](https://github.com/mrgnou/lab/tree/master/src/webgl-flames)
