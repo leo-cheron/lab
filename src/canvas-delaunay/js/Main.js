@@ -1,60 +1,55 @@
-"use strict";
-
-var AModule = require("modules/AModule");
-var App = require("./app/App");
+import AModule from "modules/AModule";
+import App from "./app/App";
 
 
 /**
  * Main
  * @constructor
  */
-var Main = function()
+class Main extends AModule
 {
-	AModule.apply(this);
-
-	this.init();
-};
-
-Main.prototype = $.extend({}, AModule.prototype,
-{
-	init: function()
+	constructor()
 	{
-		AModule.prototype.init.call(this);
+		super();
+
+		this.init();
+	}
+
+	init()
+	{
+		super.init();
 		
 		this._app = new App($("#delaunay"));
-	},
+	}
 
-	/**
-	 * Drawing on requestAnimationFrame
-	 */
-	update: function()
+	update()
 	{
-		AModule.prototype.update.call(this);
+		super.update();
 
 		this._app.render();
-	},
+	}
 
-	/**
-	 * Triggered on window resize
-	 */
-	_onResize: function()
+	_onResize()
 	{
-		AModule.prototype._onResize.call(this);
+		super._onResize();
 
 		this._app.resize();
-	},
-});
+	}
+}
 
 /**
  * Let's roll
  */
-Stage.$document.ready(function()
+const onDomContentLoaded = function() 
 {
-	var main = new Main();
+	document.removeEventListener("DOMContentLoaded", onDomContentLoaded);
+
+	const main = new Main();
 
 	(function tick()
 	{
 		main.update();
 		window.requestAnimationFrame(tick);
 	})();
-});
+};
+document.addEventListener("DOMContentLoaded", onDomContentLoaded);

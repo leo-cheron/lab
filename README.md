@@ -10,7 +10,7 @@ Be sure you have a recent installation of [nodejs](http://nodejs.org/).
 ### Gulp
 This project relies on [gulp](http://gulpjs.com/) and several of its plugins.
 
-Simply run `npm install` to install node dependencies modules. You may need administrator rights.
+Run `npm install` to install node dependencies modules.
 
 ## Getting started
 Run `gulp --name module_name` to compile, watch and preview module.

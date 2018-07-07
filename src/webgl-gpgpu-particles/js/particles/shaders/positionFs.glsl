@@ -20,8 +20,6 @@ uniform int uResetStacked;
 uniform float uStackSensibility;
 uniform int uInvert;
 
-uniform float uSmoothness;
-uniform float uThreshold;
 uniform float uMapStrength;
 
 uniform float uVx;
@@ -71,9 +69,7 @@ void main()
 	vec2 velocity = tex.zw;
 	vec2 positionInit = texture2D(uTexturePositionInit, vUv).xy;
 
-	vec2 nmPosition = position;//(position * uResolutionOutput.xy / uResolutionInput.xy); //* vec2(uResolutionInput.x / uResolutionOutput.x);
-
-	vec2 nm = normalMap(uTextureInput, nmPosition, uMapStrength).xy - .5;
+	vec2 nm = normalMap(uTextureInput, position, uMapStrength).xy - .5;
 
 	vec2 positionDelta = positionInit - position;
 	
@@ -119,13 +115,15 @@ void main()
 	vec2 newPosition = position + velocity;
 
 	if(newPosition.x > 1.0 || newPosition.x < 0.0 || newPosition.y > 1.0 || newPosition.y < 0.0)
+	{
 		newPosition = positionInit;
+	}
 	else if(uResetStacked == 1)
 	{
 		vec4 outputTx = texture2D(uTextureOutput, newPosition);
+		float luminance = 0.2126 * outputTx.r + 0.7152 * outputTx.g + 0.0722 * outputTx.b;
 
-		if(outputTx.a > uStackSensibility)
-			newPosition = positionInit;
+		if(luminance > uStackSensibility) newPosition = positionInit;
 	}
 
 	gl_FragColor = vec4(newPosition, velocity);

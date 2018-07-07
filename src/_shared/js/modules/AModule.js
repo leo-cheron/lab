@@ -1,21 +1,22 @@
-"use strict";
-
-var $ = require("lib/zepto/zepto");
-var RequestAnimationFrame = require("lib/anonymous/utils/RequestAnimationFrame");
-var Stats = require("lib/stats/Stats");
-var Stage = require("lib/anonymous/core/Stage");
-var Easing = require("lib/zepto/Easing");
+import $ from "lib/zepto/zepto";
+import RequestAnimationFrame from "lib/anonymous/utils/RequestAnimationFrame";
+import Stats from "lib/stats/Stats";
+import Stage from "lib/anonymous/core/Stage";
+import Easing from "lib/zepto/Easing";
 
 
 /**
  * AModule abstract class
  * @constructor
  */
-var AModule = module.exports = function() {};
-
-AModule.prototype = 
+export default class AModule
 {
-	init: function()
+	constructor()
+	{
+
+	}
+
+	init()
 	{
 		this._displayCredits();
 
@@ -28,30 +29,30 @@ AModule.prototype =
 		// resize
 		Stage.$window.on("resize", $.proxy(this._onResize, this));
 		Stage.resize();
-	},
+	}
 
 	/**
 	 * Drawing on requestAnimationFrame
 	 */
-	update: function()
+	update()
 	{
 		this._stats.update();
-	},
+	}
 
 	/**
 	 * Triggered on window resize
 	 */
-	_onResize: function()
+	_onResize()
 	{
 		Stage.resize();
-	},
+	}
 
-	_displayCredits: function()
+	_displayCredits()
 	{
 		if($.browser.webkit)
 		{
 			console.log("%cʕʘᴥʘʔ︎", "color: #A89E8F; font-size: 54px; font-family: courier new; line-height: 50px;");
 			console.log("");
 		}
-	},
+	}
 };

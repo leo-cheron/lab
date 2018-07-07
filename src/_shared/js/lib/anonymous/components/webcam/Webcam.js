@@ -1,20 +1,18 @@
-"use strict";
-
 /**
  * Webcam
  * @constructor
  */
-var Webcam = module.exports = function(params)
+export default class Webcam
 {
-	this.$ = $(this);
-	$.extend(this, params);
+	constructor(params)
+	{
+		this.$ = $(this);
+		this.params = params;
 
-	this.init();
-};
+		this.init();
+	}
 
-Webcam.prototype =
-{
-	init: function()
+	init()
 	{
 		navigator.getUserMedia = 	navigator.getUserMedia ||
 									navigator.webkitGetUserMedia ||
@@ -23,40 +21,37 @@ Webcam.prototype =
 
 		if (navigator.getUserMedia) 
 		{
-			navigator.getUserMedia({audio: this.audio, video: this.video}, $.proxy(this._success, this), $.proxy(this._error, this));
+			navigator.getUserMedia({audio: this.params.audio, video: this.params.video}, this._success.bind(this), this._error.bind(this));
 		} 
 		else 
 		{
 			this._error();
 		}
-	},
+	}
 
-	destroy: function()
+	destroy()
 	{
-	},
+	}
 
 	//-----------------------------------------------------o private
 
-	_success: function(stream)
+	_success(stream)
 	{
 		this.dom.src = window.URL.createObjectURL(stream);
 		$(this.dom).on("loadedmetadata", $.proxy(this._onLoadedmetadata, this))
+	}
 
-		// console.log("Webcam", $(this.dom).width());
-
-	},
-
-	_onLoadedmetadata: function()
+	_onLoadedmetadata()
 	{
 		this.dom.width = this.dom.videoWidth;
 		this.dom.height = this.dom.videoHeight;
 		
 		this.$.trigger("success");
-	},
+	}
 
-	_error: function()
+	_error(err)
 	{
 		this.$.trigger("error");
 		// TODO play fallback video
 	}
-};
+}

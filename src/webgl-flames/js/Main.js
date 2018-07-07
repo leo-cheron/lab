@@ -22,14 +22,15 @@ class Main extends AModule
 
 		var model = new FlamesModel();
 		this._flames = new Flames(model);
+		
 		var controller = new FlamesController(model, this._flames);
 	}
 
-	tick()
+	update()
 	{
 		super.update();
 
-		this._flames.tick();
+		this._flames.update();
 	}
 
 	_onResize()
@@ -43,13 +44,16 @@ class Main extends AModule
 /**
  * Let's roll
  */
-Stage.$document.ready(function()
+const onDomContentLoaded = function() 
 {
-	var main = new Main();
+	document.removeEventListener("DOMContentLoaded", onDomContentLoaded);
+
+	const main = new Main();
 
 	(function tick()
 	{
-		main.tick();
+		main.update();
 		window.requestAnimationFrame(tick);
 	})();
-});
+};
+document.addEventListener("DOMContentLoaded", onDomContentLoaded);

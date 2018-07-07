@@ -1,19 +1,17 @@
-"use strict";
-
-var GUI = require("lib/dat/dat.gui");
+import GUI from "lib/dat/dat.gui";
 
 /**
  * Controller
  * @constructor
  */
-var ParticlesModel = module.exports = function()
+export default class ParticlesModel
 {
-	this.init();
-};
+	constructor()
+	{
+		this.init();
+	}
 
-ParticlesModel.prototype = 
-{
-	init: function() 
+	init() 
 	{
 		this.data = 
 		{
@@ -36,6 +34,7 @@ ParticlesModel.prototype =
 			velocityMax: 0.0013,
 			mapStrength: 0.005,
 			pointSize: 2,
+			density: 1,
 			alpha: 0.23,
 			inverted: true,
 			particlesColor: "#FFFFFF",
@@ -50,8 +49,9 @@ ParticlesModel.prototype =
 		this._gui.add(this.data, 'initialAttraction', 0, 0.3).step(0.0001).onChange(callback);
 		this._gui.add(this.data, 'frictions', 0, 0.5).step(0.001).onChange(callback);
 		this._gui.add(this.data, 'velocityMax', 0, 0.02).step(0.00001).onChange(callback);
-		this._gui.add(this.data, 'alpha', 0, 1).step(0.0001).onChange(callback);
 		this._gui.add(this.data, 'pointSize', 1, 15).step(1).onChange(callback);
+		this._gui.add(this.data, 'alpha', 0, 1).step(0.0001).onChange(callback);
+		this._gui.add(this.data, 'density', 1, 10).step(0.001).onChange(callback);
 		this._gui.add(this.data, 'mapStrength', 0, 0.2).step(0.0001).onChange(callback);
 		
 		this._gui.add(this.data, 'resetStacked').onChange(callback);
@@ -64,10 +64,10 @@ ParticlesModel.prototype =
 		// this._gui.add(this.data, 'repulsionStrength', 0, 0.01).step(0.00001).onChange(callback);
 		// this._gui.add(this.data, 'repulsionSensibility', 0, 3).step(0.00001).onChange(callback);
 		// repulsion.add(this.data, 'repulsionRadius', 1.0, 3).step(1).onChange(callback);
-	},
+	}
 
-	_onChange: function()
+	_onChange()
 	{
 		$(this).trigger("change");
-	},
-};
+	}
+}

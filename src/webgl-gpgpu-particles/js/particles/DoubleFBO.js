@@ -1,39 +1,37 @@
-"use strict";
+import * as THREE from "lib/three/three";
 
-var THREE = require("lib/three/three");
+import copyVs from "./shaders/copyVs.glsl";
+import copyFs from "./shaders/copyFs.glsl";
 
-var copyVs = require("./shaders/copyVs.glsl");
-var copyFs = require("./shaders/copyFs.glsl");
-
-var positionFs = require("./shaders/positionFs.glsl");
+import positionFs from "./shaders/positionFs.glsl";
 
 
 /**
  * DoubleFBO
  * @constructor
  */
-var DoubleFBO = module.exports = function(width, renderer, textureInput)
+export default class DoubleFBO
 {
-	this._width = width;
-	this._particles = width * width;
-	this._renderer = renderer;
-	this._scene = new THREE.Scene();
-	this._camera = new THREE.Camera();
-	this._camera.position.z = 1;
-	this._textureInput = textureInput;
-
-	this._pingPong = true;
-
-	this.init();
-};
-
-DoubleFBO.prototype = 
-{
-	init: function()
+	constructor(width, renderer, textureInput)
 	{
-		var gl = this._renderer.getContext();
+		this._width = width;
+		this._particles = width * width;
+		this._renderer = renderer;
+		this._scene = new THREE.Scene();
+		this._camera = new THREE.Camera();
+		this._camera.position.z = 1;
+		this._textureInput = textureInput;
 
-		//TODO manage errors
+		this._pingPong = true;
+
+		this.init();
+	}
+
+	init()
+	{
+		const gl = this._renderer.getContext();
+
+		//TODO better errors management
 		if(!gl.getExtension( "OES_texture_float" )) 
 		{
 			alert( "No OES_texture_float support for float textures!" );
@@ -46,7 +44,7 @@ DoubleFBO.prototype =
 		}
 
 		// Create position textures
-		this._dtPosition = this._initPositionTexture();
+		this._dtPosition = this._getInitPositionsTexture();
 
 		this._rtPosition1 = this.getRenderTarget(THREE.RGBAFormat, this._width, this._width);
 		this._rtPosition2 = this._rtPosition1.clone();
@@ -58,8 +56,8 @@ DoubleFBO.prototype =
 			{
 				uTexture: { type: "t", value: null }
 			},
-			vertexShader: copyVs(),
-			fragmentShader: copyFs(),
+			vertexShader: copyVs,
+			fragmentShader: copyFs,
 			depthTest: false
 		});
 
@@ -71,7 +69,7 @@ DoubleFBO.prototype =
 				uResolutionOutput: { type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
 				
 				uTexturePosition: { type: "t", value: null },
-				uTexturePositionInit: { type: "t", value: this._dtPosition},
+				uTexturePositionInit: { type: "t", value: this._dtPosition },
 				uTextureInput: { type: "t", value: this._textureInput },
 				uTextureOutput: { type: "t", value: null },
 
@@ -85,47 +83,46 @@ DoubleFBO.prototype =
 				uRepulsion: { type: "i", value: null },
 				uRepulsionStrength: { type: "f", value: null },
 				uRepulsionSensibility: { type: "f", value: null },
-				// uRepulsionRadius: { type: "f", value: null },
 				uInvert: { type: "i", value: null },
 
 		 		uMapStrength: { type: "f", value: 0.1 }
 			},
-			vertexShader: copyVs(),
-			fragmentShader: positionFs(),
+			vertexShader: copyVs,
+			fragmentShader: positionFs,
 			depthTest: false
 		});
-
+		
 		// Mesh
 		this._mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), this._copyShader);
 		this._scene.add(this._mesh);
 		
 		// Init position		
 		this._renderTexture(this._dtPosition, this._rtPosition1);
-		//this._renderTexture(this._rtPosition1, this._rtPosition2);
-	},
+		// this._renderTexture(this._dtPosition, this._rtPosition2);
+	}
 
-	render: function()
-	{	
+	render()
+	{
 		if (this._pingPong)
 			this._renderShader(this._rtPosition1, this._rtPosition2);
 		else 
 			this._renderShader(this._rtPosition2, this._rtPosition1);
 
 		this._pingPong = !this._pingPong;
-	},
+	}
 
-	resize: function(width, height)
+	resize(width, height)
 	{
 		this.positionShader.uniforms.uResolutionOutput.value.x = width;
 		this.positionShader.uniforms.uResolutionOutput.value.y = height;
 
 		this.positionShader.uniforms.uResolutionInput.value.x = width;
 		this.positionShader.uniforms.uResolutionInput.value.y = height;
-	},
+	}
 
-	getRenderTarget: function(type, width, height) 
+	getRenderTarget(type, width, height) 
 	{
-		var renderTarget = new THREE.WebGLRenderTarget(width, height, 
+		const renderTarget = new THREE.WebGLRenderTarget(width, height, 
 		{
 			// wrapS: THREE.ClampToEdgeWrapping,
 			// wrapT: THREE.ClampToEdgeWrapping,
@@ -133,64 +130,62 @@ DoubleFBO.prototype =
 			magFilter: THREE.NearestFilter,
 			format: type,
 			type: THREE.FloatType,
-			stencilBuffer: false
+			stencilBuffer: false,
+			depthBuffer: false
 		});
-		renderTarget.generateMipmaps = false;
+		renderTarget.texture.generateMipmaps = false;
 
 		return renderTarget;
-	},
+	}
 
 	//-----------------------------------------------------o private
 
-	_renderTexture: function(input, output) 
+	_renderTexture(input, output) 
 	{
 		this._mesh.material = this._copyShader;
 
 		this._copyShader.uniforms.uTexture.value = input;
 
 		this._renderer.render(this._scene, this._camera, output);
-	},
+	}
 
-	_renderShader: function(input, output)
+	_renderShader(input, output)
 	{
 		this._mesh.material = this.positionShader;
 
-		this.positionShader.uniforms.uTexturePosition.value = input;
+		this.positionShader.uniforms.uTexturePosition.value = input.texture;
+
+		this.currentTexture = input.texture;
 
 		this._renderer.render(this._scene, this._camera, output);
-	},
+	}
 
-	_initPositionTexture: function() 
+	_getInitPositionsTexture()
 	{
-		var entries = 4;
-		var a = new Float32Array(this._particles * entries);
+		const entries = 4;
+		const a = new Float32Array(this._particles * entries);
 
-		var l = a.length;
-		//var rand = 1 / l;
-
-		for (var i = 0; i < l; i += entries)
+		for (let i = 0, l = a.length; i < l; i += entries)
 		{
-			var x = (Math.random() * this._textureInput.image.width) / this._textureInput.image.width;
-			var y = (Math.random() * this._textureInput.image.height) / this._textureInput.image.height;
-			//var x = ((i/entries) % this._width) / this._width + (Math.random() - 0.5) * rand;
-			//var y = ((i/entries | 0) / this._width) / this._width + (Math.random() - 0.5) * rand;
+			const x = (Math.random() * this._textureInput.image.width) / this._textureInput.image.width;
+			const y = (Math.random() * this._textureInput.image.height) / this._textureInput.image.height;
 
-			var ratio = 0.001;
-			var vx = (Math.random() - 0.5) * ratio;
-			var vy = (Math.random() - 0.5) * ratio;
+			const ratio = 0.001;
+			const vx = (Math.random() - 0.5) * ratio;
+			const vy = (Math.random() - 0.5) * ratio;
 
-			a[ i + 0 ] = x; //* 2 - 1;
-			a[ i + 1 ] = y; //* 2 - 1;
+			a[ i + 0 ] = x;
+			a[ i + 1 ] = y;
 			a[ i + 2 ] = vx;
 			a[ i + 3 ] = vy;
 		}
 
-		var texture = new THREE.DataTexture(a, this._width, this._width, THREE.RGBAFormat, THREE.FloatType);
+		const texture = new THREE.DataTexture(a, this._width, this._width, THREE.RGBAFormat, THREE.FloatType);
 		texture.minFilter = THREE.NearestFilter;
 		texture.magFilter = THREE.NearestFilter;
 		texture.needsUpdate = true;
 		texture.flipY = false;
 
 		return texture;
-	}	
-};
+	}
+}

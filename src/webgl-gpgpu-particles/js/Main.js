@@ -1,27 +1,24 @@
-"use strict";
-
-var Config = require("./Config");
-var Particles = require("./particles/Particles");
-var Webcam = require("lib/anonymous/components/webcam/Webcam");
-var AModule = require("modules/AModule");
+import Particles from "./particles/Particles";
+import Webcam from "lib/anonymous/components/webcam/Webcam";
+import AModule from "modules/AModule";
 
 
 /**
  * Main
  * @constructor
  */
-var Main = function()
+export default class Main extends AModule
 {
-	AModule.apply(this);
-
-	this.init();
-};
-
-Main.prototype = $.extend({}, AModule.prototype,
-{
-	init: function()
+	constructor()
 	{
-		AModule.prototype.init.call(this);
+		super();
+	
+		this.init();
+	}
+
+	init()
+	{
+		super.init(this);
 		
 		// 
 		this._content = $("#particles");
@@ -36,47 +33,50 @@ Main.prototype = $.extend({}, AModule.prototype,
 				video: true,
 				audio: false
 			});
-		this._webcam.$.on("success", $.proxy(this._onWebcamSuccess, this));
-	},
+		this._webcam.$.on("success", this._onWebcamSuccess.bind(this));
+	}
 
 	/**
 	 * Drawing on requestAnimationFrame
 	 */
-	update: function()
+	update()
 	{
 		this._particles.update();
 
-		AModule.prototype.update.call(this);
-	},
+		super.update();
+	}
 
 	/**
 	 * Triggered on window resize
 	 */
-	_onResize: function()
+	_onResize()
 	{
-		AModule.prototype._onResize.call(this);
+		super._onResize(this);
 
 		this._particles.resize();
-	},
+	}
 
 	//-----------------------------------------------------o webcam handlers
 
-	_onWebcamSuccess: function()
+	_onWebcamSuccess()
 	{
 		this._particles.setTexture(this._webcam.dom, true);
 	}
-});
+}
 
 /**
  * Let's roll
  */
-Stage.$document.ready(function()
+const onDomContentLoaded = function() 
 {
-	var main = new Main();
+	document.removeEventListener("DOMContentLoaded", onDomContentLoaded);
+
+	const main = new Main();
 
 	(function tick()
 	{
 		main.update();
 		window.requestAnimationFrame(tick);
 	})();
-});
+};
+document.addEventListener("DOMContentLoaded", onDomContentLoaded);

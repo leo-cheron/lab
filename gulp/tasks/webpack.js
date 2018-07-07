@@ -17,8 +17,13 @@ var logger = function(err, stats)
 		console.log(gutil.colors.red('Webpack errors:'));
 		stats.compilation.errors.forEach(function(error)
 		{
-			gutil.log(gutil.colors.underline.red(error.origin.resource) + ":\n" + gutil.colors.red(error.toString()));
+			if(error.origin)
+				gutil.log(gutil.colors.underline.red(error.origin.resource) + ":\n" + gutil.colors.red(error.toString()));
+			else
+				gutil.log(gutil.colors.red(error.toString()));
 		});
+
+		if(!config.isWatching) process.exit(1);
 	}
 	else
 	{
@@ -33,35 +38,29 @@ gulp.task('webpack', ['setModuleSrc'], function(callback)
 	var built = false;
 
 	var webpackConfig = config.webpack;
-	webpackConfig.entry = config.moduleSrc + 'js/Main.es6';
+	webpackConfig.entry = config.moduleSrc + 'js/Main.js';
 	webpackConfig.output = 
 	{
 		path: config.bin + argv.name +  "/js", 
 		filename: "scripts.js"
 	};
 
-	webpackConfig.resolve.root = 
-	[
-		config.src + '_shared/js/',
-		config.moduleSrc + 'js/'
-	];
+	webpackConfig.resolve.modules.push(config.src + '_shared/js/', config.moduleSrc + 'js/');
 
-	if(config.env === 'prod')
+	if(config.env !== 'prod')
 	{
-		webpackConfig.devtool = undefined;
-		webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin(
-		{
-			minimize: true,
-			output: {comments: false}
-		}));
+		webpackConfig.devtool = 'cheap-module-eval-source-map';
 	}
-
+	
 	if(config.isWatching)
 	{
 		webpack(webpackConfig).watch(200, function(err, stats)
 		{
 			logger(err, stats);
-			// browserSync.reload();
+			
+			if(config.browserSync)
+				config.browserSync.reload();
+
 			// On the initial compile, let gulp know the task is done
 			if(!built)
 			{

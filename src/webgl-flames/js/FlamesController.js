@@ -27,7 +27,7 @@ export default class SceneController
 		var stream = this._gui.addFolder("Air stream");
 		stream.add(this.model, 'streamVx', -1.0, 1.0).step(0.0001).onChange(callback);
 		stream.add(this.model, 'streamVy', 0.0, 2.0).step(0.0001).onChange(callback);
-		stream.add(this.model, 'power', 0.2, 1.2).step(0.0001).onChange(callback);
+		stream.add(this.model, 'power', 0.05, 1.2).step(0.0001).onChange(callback);
 		stream.open();
 
 		var noise = this._gui.addFolder("Noise");

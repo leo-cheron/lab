@@ -1,35 +1,53 @@
+const argv = require('yargs').argv;
+
+const src = process.cwd() + "/src/";
+const bin = process.cwd() + "/www/";
+const root = process.cwd() + "../";
+
 module.exports = {
 
-	src: process.cwd() + "/src/",
-	bin: process.cwd() + "/www/",
-
-	device: null,
+	src: src,
+	bin: bin,
 
 	browsersSupport: ['last 2 versions', '> 5%'],
 
 	webpack: {
-		cache: true,
-		devtool: 'cheap-module-eval-source-map',
+		mode: argv.production ? 'production' : 'development',
 		module: {
-			loaders: [
-				{ test: /\.es6$/, exclude: /node_modules/, loader: 'babel-loader', query: { presets: [require.resolve('babel-preset-es2015-loose')] }},
-				{ test: /\.glsl$/, exclude: /node_modules/, loader: 'webpack-glsl'}
-			],
+			rules: [{
+				test: /\.(js)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						cacheDirectory: true, 
+						presets: [require.resolve('babel-preset-es2015')]
+					}
+				}
+			}, {
+				test: /\.(glsl|frag|vert)$/, 
+				exclude: /node_modules/,
+				loader: 'webpack-glsl-loader'
+			}],
 			noParse: [
-				// /lib\/three\/three/,
-				// /lib\/tweenLite/,
-				/lib\/zepto/,
+				/lib\/three\/three/,
+				/lib\/zepto/
 			]
 		},
 		resolve: {
-			root: undefined, // to be specified with the use of moduleSrc task
-			extensions: ['', '.js', '.es6'],
-			alias:
-			{
+			unsafeCache: true,
+			modules: [
+				root + 'node_modules/'
+			],
+			extensions: ['.js'],
+			alias: {
 				Emitter: process.cwd() + "/node_modules/component-emitter/index.js",
 			}
 		},
-		plugins: []
+		plugins: [],
+		watchOptions: {
+			aggregateTimeout: 300,
+			ignored: /node_modules/,
+		}
 	}
-	
 };

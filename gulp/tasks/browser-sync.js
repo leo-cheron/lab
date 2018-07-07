@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	browserSync = require('browser-sync'),
+	browserSync = require('browser-sync').create(),
 	argv = require('yargs').argv,
 	config = require('../config');
 
@@ -11,7 +10,6 @@ gulp.task('browser-sync', function()
 {
 	var options = 
 	{
-		// proxy: domain,
 		server: {
             baseDir: config.bin + argv.name
         },
@@ -22,10 +20,12 @@ gulp.task('browser-sync', function()
 		ghostMode: false
 	};
 
-	browserSync(options);
+	browserSync.init(options);
+
+	config.browserSync = browserSync;
 });
 
 gulp.task('reload', function() 
 {
-    browserSync.reload();
+	browserSync.reload();
 });

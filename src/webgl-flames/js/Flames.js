@@ -1,6 +1,8 @@
 import THREE from "lib/three/three";
 import OrbitControls from "lib/three/controls/OrbitControls";
 
+import Stage from "lib/anonymous/core/Stage";
+
 import FlameFs from "./shaders/FlameFs.glsl";
 import FlameVs from "./shaders/FlameVs.glsl";
 
@@ -118,9 +120,10 @@ export default class Flames
 		this.renderer.setSize(Stage.width, Stage.height);
 	}
 
-	tick()
+	update()
 	{
-		var time = 1000 + performance.now() * 0.01;
+		const time = 1000 + performance.now() * 0.005;
+
 		this.mesh.material.uniforms.time.value = time;
 
 		this.cameraControls.update();

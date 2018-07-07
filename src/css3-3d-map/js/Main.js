@@ -1,54 +1,55 @@
-"use strict";
-
-var AModule = require("modules/AModule");
-var Map = require("map/Map");
+import AModule from "modules/AModule";
+import Map from "map/Map";
 
 
 /**
  * Main
  * @constructor
  */
-var Main = function()
+class Main extends AModule
 {
-	AModule.apply(this);
-
-	this.init();
-};
-
-Main.prototype = $.extend({}, AModule.prototype,
-{
-	init: function()
+	constructor()
 	{
-		AModule.prototype.init.call(this);
+		super();
+
+		this.init();
+	}
+
+	init()
+	{
+		super.init();
 		
 		this._map = new Map();
-	},
+	}
 
-	update: function()
+	update()
 	{
 		this._map.update();
 
-		AModule.prototype.update.call(this);
-	},
+		super.update();
+	}
 
-	_onResize: function()
+	_onResize()
 	{
-		AModule.prototype._onResize.call(this);
+		super._onResize();
 		
 		this._map.resize();
-	},
-});
+	}
+};
 
 /**
  * Let's roll
  */
-Stage.$document.ready(function()
+const onDomContentLoaded = function() 
 {
-	var main = new Main();
+	document.removeEventListener("DOMContentLoaded", onDomContentLoaded);
+
+	const main = new Main();
 
 	(function tick()
 	{
 		main.update();
 		window.requestAnimationFrame(tick);
 	})();
-});
+};
+document.addEventListener("DOMContentLoaded", onDomContentLoaded);
